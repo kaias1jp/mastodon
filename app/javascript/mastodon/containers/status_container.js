@@ -107,19 +107,7 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
   },
 
   onQuote (status, router) {
-    dispatch((_, getState) => {
-      let state = getState();
-
-      if (state.getIn(['compose', 'text']).trim().length !== 0) {
-        dispatch(openModal('CONFIRM', {
-          message: intl.formatMessage(messages.quoteMessage),
-          confirm: intl.formatMessage(messages.quoteConfirm),
-          onConfirm: () => dispatch(quoteCompose(status, router)),
-        }));
-      } else {
-        dispatch(quoteCompose(status, router));
-      }
-    });
+    dispatch(quoteCompose(status, router));
   },
 
   onFavourite (status) {
