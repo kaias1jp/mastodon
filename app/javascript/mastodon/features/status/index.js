@@ -264,8 +264,17 @@ class Status extends ImmutablePureComponent {
     }
   }
 
-    handleQuoteClick = (status) => {
-    this.props.dispatch(quoteCompose(status, this.context.router.history));
+  handleQuoteClick = (status) => {
+    let { askReplyConfirmation, dispatch, intl } = this.props;
+    if (askReplyConfirmation) {
+      dispatch(openModal('CONFIRM', {
+        message: intl.formatMessage(messages.quoteMessage),
+        confirm: intl.formatMessage(messages.quoteConfirm),
+        onConfirm: () => dispatch(quoteCompose(status, this.context.router.history)),
+      }));
+    } else {
+      dispatch(quoteCompose(status, this.context.router.history));
+    }
   }
 
   handleDeleteClick = (status, history, withRedraft = false) => {
