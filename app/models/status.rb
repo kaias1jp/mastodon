@@ -173,6 +173,10 @@ class Status < ApplicationRecord
     !quote_id.nil? && quote
   end
 
+  def quote_visibility
+    quote&.visibility
+  end
+
   def within_realtime_window?
     created_at >= REAL_TIME_WINDOW.ago
   end
