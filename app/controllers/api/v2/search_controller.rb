@@ -28,3 +28,6 @@ class Api::V2::SearchController < Api::BaseController
     params.permit(:type, :offset, :min_id, :max_id, :account_id)
   end
 end
+
+
+

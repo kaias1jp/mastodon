@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 class StatusesIndex < Chewy::Index
-    settings index: { refresh_interval: '15m' }, analysis: {
-          tokenizer: {
-                  kuromoji_user_dict: {
-                            type: 'kuromoji_tokenizer',
-                                  },
-                                      },
-                                          analyzer: {
-                                              content: {
-                                                        type: 'custom',
-                                                                tokenizer: 'kuromoji_user_dict',
-                                                                        filter: %w(
-                                                                                  kuromoji_baseform
-                                                                                            kuromoji_stemmer
-                                                                                                      cjk_width
-                                                                                                                lowercase
-                                                                                                                        ),
-                                                                                                                              },
-                                                                                                                                  },
-                                                                                                                                    }
+  settings index: { refresh_interval: '15m' }, analysis: {
+    tokenizer: {
+      kuromoji_user_dict: {
+        type: 'kuromoji_tokenizer',
+      },
+    },
+    analyzer: {
+      content: {
+        type: 'custom',
+        tokenizer: 'kuromoji_user_dict',
+        filter: %w(
+          kuromoji_baseform
+          kuromoji_stemmer
+          cjk_width
+          lowercase
+        ),
+      },
+    },
+  }
 
   define_type ::Status.unscoped.kept.without_reblogs.includes(:media_attachments, :preloadable_poll) do
     crutch :mentions do |collection|
