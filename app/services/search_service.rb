@@ -38,7 +38,7 @@ class SearchService < BaseService
     definition = parsed_query.apply(StatusesIndex).order(id: :desc) #parsed_query.apply(StatusesIndex.filter(term: { searchable_by: @account.id }))
 
     if @options[:account_id].present?
-     # definition = definition.filter(term: { account_id: @options[:account_id] })
+      definition = definition.filter(term: { account_id: @options[:account_id] })
     end
 
     if @options[:min_id].present? || @options[:max_id].present?
