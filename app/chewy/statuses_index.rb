@@ -2,20 +2,31 @@
 
 class StatusesIndex < Chewy::Index
   settings index: { refresh_interval: '15m' }, analysis: {
-    tokenizer: {
-      kuromoji_user_dict: {
-        type: 'kuromoji_tokenizer',
+    filter: {
+      english_stop: {
+        type: 'stop',
+        stopwords: '_english_',
+      },
+      english_stemmer: {
+        type: 'stemmer',
+        language: 'english',
+      },
+      english_possessive_stemmer: {
+        type: 'stemmer',
+        language: 'possessive_english',
       },
     },
     analyzer: {
       content: {
-        type: 'custom',
-        tokenizer: 'kuromoji_user_dict',
+        tokenizer: 'kuromoji_tokenizer',
+        char_filter: %w(
+          icu_normalizer
+        ),
         filter: %w(
-          kuromoji_baseform
-          kuromoji_stemmer
-          cjk_width
-          lowercase
+          english_possessive_stemmer
+          asciifolding
+          english_stop
+          english_stemmer
         ),
       },
     },
