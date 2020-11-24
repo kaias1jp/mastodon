@@ -1720,6 +1720,20 @@ a.account__display-name {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+
+  * {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+  }
+
+  &::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent; /* Chrome/Safari/Webkit */
+  }
 
   .image-loader__preview-canvas {
     max-width: $media-modal-media-max-width;
@@ -4425,8 +4439,6 @@ a.status-card.compact:hover {
 
 .modal-root {
   position: relative;
-  transition: opacity 0.3s linear;
-  will-change: opacity;
   z-index: 9999;
 }
 
@@ -4604,6 +4616,21 @@ a.status-card.compact:hover {
   right: 8px;
   top: 8px;
   z-index: 100;
+}
+
+.media-modal__zoom-button {
+  position: absolute;
+  right: 64px;
+  top: 8px;
+  z-index: 100;
+  pointer-events: auto;
+  transition: opacity 0.3s linear;
+  will-change: opacity;
+}
+
+.media-modal__zoom-button--hidden {
+  pointer-events: none;
+  opacity: 0;
 }
 
 .onboarding-modal,
@@ -7175,6 +7202,13 @@ noscript {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 
   h2 {
     font-size: 16px;
