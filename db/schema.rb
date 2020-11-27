@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_193255) do
+ActiveRecord::Schema.define(version: 2020_11_27_220016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 2020_11_27_193255) do
     t.jsonb "fields"
     t.string "actor_type"
     t.boolean "discoverable"
+    t.boolean "cat", default: false, null: false
     t.string "also_known_as", array: true
     t.datetime "silenced_at"
     t.datetime "suspended_at"
