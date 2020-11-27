@@ -28,6 +28,7 @@ class Formatter
     unless status.local?
       html = reformat(raw_content)
       html = encode_custom_emojis(html, status.emojis, options[:autoplay]) if options[:custom_emojify]
+      html = nyaize(html) if options[:nyaize]
       return html.html_safe # rubocop:disable Rails/OutputSafety
     end
 
@@ -39,9 +40,14 @@ class Formatter
     html = encode_and_link_urls(html, linkable_accounts)
     html = encode_custom_emojis(html, status.emojis, options[:autoplay]) if options[:custom_emojify]
     html = simple_format(html, {}, sanitize: false)
+    html = nyaize(html) if options[:nyaize]
     html = html.delete("\n")
 
     html.html_safe # rubocop:disable Rails/OutputSafety
+  end
+
+  def nyaize(html)
+    html.gsub(/な/, "にゃ").gsub(/ナ/, "ニャ").gsub(/ﾅ/, "ﾆｬ")
   end
 
   def reformat(html)

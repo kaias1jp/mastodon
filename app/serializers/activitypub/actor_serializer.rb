@@ -13,7 +13,7 @@ class ActivityPub::ActorSerializer < ActivityPub::Serializer
              :inbox, :outbox, :featured, :featured_tags,
              :preferred_username, :name, :summary,
              :url, :manually_approves_followers,
-             :discoverable
+             :discoverable, :is_cat
 
   has_one :public_key, serializer: ActivityPub::PublicKeySerializer
 
@@ -92,6 +92,10 @@ class ActivityPub::ActorSerializer < ActivityPub::Serializer
 
   def preferred_username
     object.username
+  end
+
+  def is_cat
+    object.cat
   end
 
   def discoverable

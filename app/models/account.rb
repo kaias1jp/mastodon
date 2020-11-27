@@ -52,6 +52,7 @@
 #  devices_url                   :string
 #  sensitized_at                 :datetime
 #  suspension_origin             :integer
+#  cat                           :boolean          default(FALSE), not null
 #
 
 class Account < ApplicationRecord

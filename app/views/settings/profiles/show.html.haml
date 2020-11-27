@@ -33,6 +33,9 @@
     .fields-group
       = f.input :discoverable, as: :boolean, wrapper: :with_label, hint: t('simple_form.hints.defaults.discoverable'), recommended: true
 
+  .fields-group
+    = f.input :cat, as: :boolean, wrapper: :with_label, hint: t('simple_form.hints.defaults.cat')
+
   %hr.spacer/
 
   .fields-row
