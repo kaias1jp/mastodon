@@ -36,7 +36,11 @@ module Admin
       @timeline_preview      = Setting.timeline_preview
       @spam_check_enabled    = Setting.spam_check_enabled
       @trends_enabled        = Setting.trends
-      @search_version        = Chewy::Runtime.version
+      @search_version        = if @search_enabled
+                                 Chewy::Runtime.version
+                               else
+                                 ""
+                               end
     end
 
     private
