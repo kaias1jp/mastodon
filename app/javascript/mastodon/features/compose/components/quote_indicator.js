@@ -6,7 +6,6 @@ import IconButton from '../../../components/icon_button';
 import DisplayName from '../../../components/display_name';
 import { defineMessages, injectIntl } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { isRtl } from '../../../rtl';
 import AttachmentList from 'mastodon/components/attachment_list';
 
 const messages = defineMessages({
@@ -46,7 +45,6 @@ class QuoteIndicator extends ImmutablePureComponent {
 
     const content = { __html: status.get('contentHtml') };
     const style   = {
-      direction: isRtl(status.get('search_index')) ? 'rtl' : 'ltr',
     };
 
     return (
