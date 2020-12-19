@@ -1,16 +1,10 @@
-class ChangeCatToAccounts < ActiveRecord::Migration[5.2]
+class UpdateCat < ActiveRecord::Migration[5.2]
   disable_ddl_transaction!
 
-  def up
+  def change
     add_column :accounts, :cat, :boolean
     change_column_default :accounts, :cat, false
-  end
-
-  def change
     Account.in_batches.update_all cat: false
   end
 
-  def down
-    remove_column :accounts, :cat
-  end
 end
