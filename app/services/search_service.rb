@@ -118,25 +118,12 @@ class SearchService < BaseService
       blocking: Account.blocking_map(account_ids, account.id),
       blocked_by: Account.blocked_by_map(account_ids, account.id),
       muting: Account.muting_map(account_ids, account.id),
-      following: Account.following_map(account_ids, account.id),
+      #following: Account.following_map(account_ids, account.id),
       domain_blocking_by_domain: Account.domain_blocking_map_by_domain(domains, account.id),
     }
   end
 
   def parsed_query
-    split_query = @query.split(/[ |　]/)
-    new_query = []
-    split_query.each{|var|
-      if var[0] == '+' 
-        new_query << '+"'+var[1..]+'"'
-      elsif var[0] == '-'
-        new_query << '-"'+var[1..]+'"'
-      else 
-        new_query << '"'+var+'"'
-      end
-    }
-    q = new_query.join(' ')
-
-    SearchQueryTransformer.new.apply(SearchQueryParser.new.parse(q))
+    SearchQueryTransformer.new.apply(SearchQueryParser.new.parse(@query.gsub(/(　)/," ")))
   end
 end
