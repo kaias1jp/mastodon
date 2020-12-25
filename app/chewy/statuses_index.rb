@@ -10,6 +10,20 @@ class StatusesIndex < Chewy::Index
         settings_path: '/etc/elasticsearch/sudachi/sudachi.json',
       },
     },
+    filter: {
+      english_stop: {
+        type: 'stop',
+stopwords: '_english_',
+      },
+      english_stemmer: {
+        type: 'stemmer',
+language: 'english',
+      },
+      english_possessive_stemmer: {
+        type: 'stemmer',
+language: 'possessive_english',
+      },
+    },
     analyzer: {
       content: {
         "char_filter":["icu_normalizer"],
@@ -21,6 +35,10 @@ class StatusesIndex < Chewy::Index
           sudachi_part_of_speech
           sudachi_ja_stop
           sudachi_baseform
+          english_possessive_stemmer
+asciifolding
+english_stop
+english_stemmer
         ),
       },
     },
