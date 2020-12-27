@@ -112,14 +112,14 @@ module Mastodon
                   # crutches and our searchable_by logic depends on them
                   if type == StatusesIndex::Status
                     bulk_body.map! do |entry|
-                      if entry[:index] && entry.dig(:index, :data, 'searchable_by').blank?
-                        index_count  -= 1
-                        delete_count += 1
+                  #    if entry[:index] && entry.dig(:index, :data, 'searchable_by').blank?
+                  #      index_count  -= 1
+                  #      delete_count += 1
 
-                        { delete: entry[:index].except(:data) }
-                      else
+                  #      { delete: entry[:index].except(:data) }
+                  #    else
                         entry
-                      end
+                  #    end
                     end
                   end
 
