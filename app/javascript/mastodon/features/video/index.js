@@ -123,10 +123,11 @@ class Video extends React.PureComponent {
     muted: PropTypes.bool,
     link: PropTypes.node,
     quote: PropTypes.bool,
+    componetIndex: PropTypes.number,
   };
 
   static defaultProps = {
-    frameRate: 25,
+    frameRate: '25',
   };
 
   state = {
@@ -503,6 +504,7 @@ class Video extends React.PureComponent {
       startTime: this.video.currentTime,
       autoPlay: !this.state.paused,
       defaultVolume: this.state.volume,
+      componetIndex: this.props.componetIndex,
     });
   }
 
