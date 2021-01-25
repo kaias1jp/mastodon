@@ -28,10 +28,10 @@ class Sanitize
       return unless class_list
 
       class_list.keep_if do |e|
-        next true if e =~ /^(h|p|u|dt|e)-/ # microformats classes
-        next true if e =~ /^(mention|hashtag)$/ # semantic classes
-        next true if e =~ /^(ellipsis|invisible)$/ # link formatting classes
-        next true if e =~ /^quote-inline$/ # quote inline classes
+        next true if /^(h|p|u|dt|e)-/.match?(e) # microformats classes
+        next true if /^(mention|hashtag)$/.match?(e) # semantic classes
+        next true if /^(ellipsis|invisible)$/.match?(e) # link formatting classes
+        next true if /^quote-inline$/.match?(e) # quote inline classes
       end
 
       node['class'] = class_list.join(' ')
